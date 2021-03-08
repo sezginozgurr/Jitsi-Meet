@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "454586485944",
+    "project_id": "video-meeting-a441d",
+    "storage_bucket": "video-meeting-a441d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454586485944:android:3f1a58496b229c3164784d",
+        "android_client_info": {
+          "package_name": "com.example.jeetsemeet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454586485944-86hhoc3kf7a38m29gvdj92k6621asshm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1VOT6_ZD352SRMtpplUMUcYIadzKGdL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "454586485944-86hhoc3kf7a38m29gvdj92k6621asshm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

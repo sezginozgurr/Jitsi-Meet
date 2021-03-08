@@ -1,4 +1,4 @@
-package com.example.jeetsemeet
+package com.example.jeetsemeet.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
