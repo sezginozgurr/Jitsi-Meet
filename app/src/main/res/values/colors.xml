@@ -14,6 +14,7 @@
     <color name="colorSecondryText">#03A9F4</color>
     <color name="colorDivider">#8BC34A</color>
     <color name="colorTextIcons">#FF9800</color>
+    <color name="yellow">#FFC107</color>
     <color name="colorBackground">#FF5722</color>
     <color name="colorHintText">#BAB6B6</color>
 </resources>

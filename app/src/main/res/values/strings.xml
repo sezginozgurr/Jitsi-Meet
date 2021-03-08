@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">JeetseMeet</string>
+    <string name="sign_in_your_account">Sign in your account</string>
+    <string name="email_adresini_girin">Email adresini girin.</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="password">Password</string>
+    <string name="password_girin">Password girin.</string>
+    <string name="welcome_to_jitsi_meet">Welcome To Jitsi Meet</string>
+    <string name="sign_in">Sign In</string>
 </resources>
