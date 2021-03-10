@@ -10,4 +10,8 @@ object Constant {
     const val KEY_PASSWORD = "password"
     const val KEY_PREFENRENCE_NAME = "videoMeetingPreference"
     const val KEY_IS_SIGNED_IN = "isSignedIn"
+
+    const val KEY_USER_ID = "users_id"
+
+
 }
