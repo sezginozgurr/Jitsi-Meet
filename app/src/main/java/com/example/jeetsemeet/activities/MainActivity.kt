@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
                 Constant.KEY_LAST_NAME, ""
             )
         )
-/*        FirebaseInstanceId.getInstance().instanceId
+        FirebaseInstanceId.getInstance().instanceId
             .addOnSuccessListener { instanceIdResult ->
                 val token = instanceIdResult.token
                 sendFCMTokenToDatabase(token)
-            }*/
+            }
         /*FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { task ->
             if (task.isSuccessful && task.result != null) {
                 sendFCMTokenToDatabase(task.result!!.token)

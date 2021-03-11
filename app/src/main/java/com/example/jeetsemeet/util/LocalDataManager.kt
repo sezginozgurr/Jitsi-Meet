@@ -23,7 +23,7 @@ class LocalDataManager {
     }
 
     fun getBoolean(context: Context, key: String?): Boolean {
-        return context.getSharedPreferences(Constant.KEY_PREFENRENCE_NAME, Context.MODE_PRIVATE).getBoolean(key,false)
+        return context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE).getBoolean(key,false)
     }
 
     fun clearSharedPreference(context: Context) {

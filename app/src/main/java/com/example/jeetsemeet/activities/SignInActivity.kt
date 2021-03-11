@@ -26,9 +26,6 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (LocalDataManager.instance.getBoolean(this@SignInActivity, Constant.KEY_IS_SIGNED_IN)) {
-            startActivity(Intent(this@SignInActivity, MainActivity::class.java))
-        }
         binding.textSignUp.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
@@ -48,47 +45,24 @@ class SignInActivity : AppCompatActivity() {
             .whereEqualTo(Constant.KEY_EMAIL, binding.inputEmail.text.toString())
             .whereEqualTo(Constant.KEY_PASSWORD, binding.inputPassword.text.toString())
             .get()
-
-
             .addOnCompleteListener { task ->
                 if ((task.isSuccessful) && task.result != null && task.result!!.documents.size > 0) {
-                    Log.e("TAG", "${task.result.toString()}")
-                    Log.e("TAG", "${task.result!!.documents[0]}")
+                    Log.e("TAG","${task.result.toString()}")
+                   Log.e("TAG","${task.result!!.documents[0]}")
                     val documentSnapshot: DocumentSnapshot = task.result!!.documents[0]
-                    LocalDataManager.instance.putBoolean(
-                        this@SignInActivity,
-                        Constant.KEY_IS_SIGNED_IN,
-                        true
-                    )
-                    LocalDataManager.instance.putString(
-                        this@SignInActivity,
-                        Constant.KEY_USER_ID,
-                        documentSnapshot.id
-                    )
-                    LocalDataManager.instance.putString(
-                        this@SignInActivity,
-                        Constant.KEY_FIRST_NAME,
-                        documentSnapshot.getString(Constant.KEY_FIRST_NAME)
-                    )
-                    LocalDataManager.instance.putString(
-                        this@SignInActivity,
-                        Constant.KEY_LAST_NAME,
-                        documentSnapshot.getString(Constant.KEY_LAST_NAME)
-                    )
                     LocalDataManager.instance.putString(
                         this@SignInActivity,
                         Constant.KEY_EMAIL,
                         documentSnapshot.getString(Constant.KEY_EMAIL)
                     )
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
+                    LocalDataManager.instance.getString(
+                        this@SignInActivity, Constant.KEY_USER_ID, documentSnapshot.id
+                    )
+                    startActivity(Intent(this, MainActivity::class.java))
                 } else {
-
-
-                    binding.btnSignIn.visibility = View.GONE
-                    binding.progressBar.visibility = View.VISIBLE
-                    Toast.makeText(this, "Unabled to sign in", Toast.LENGTH_SHORT).show()
+                    binding.btnSignIn.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(this, "Unable sign in", Toast.LENGTH_SHORT).show()
                 }
             }
     }
