@@ -5,25 +5,25 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 
 class LocalDataManager {
-    fun setSharedPreferenceString(context: Context, key: String?, value: String?) {
-        val sharedPref: SharedPreferences = context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
+    fun putString(context: Context, key: String?, value: String?) {
+        val sharedPref: SharedPreferences = context.getSharedPreferences(Constant.KEY_PREFENRENCE_NAME, Context.MODE_PRIVATE)
         val edit = sharedPref.edit()
         edit.putString(key, value)
         edit.apply()
     }
-    fun setSharedPreferenceBoolean(context: Context, key: String?, value: Boolean?) {
-        val sharedPref: SharedPreferences = context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
+    fun putBoolean(context: Context, key: String?, value: Boolean?) {
+        val sharedPref: SharedPreferences = context.getSharedPreferences(Constant.KEY_PREFENRENCE_NAME, Context.MODE_PRIVATE)
         val edit = sharedPref.edit()
         edit.putBoolean(key, value!!)
         edit.apply()
     }
 
-    fun getSharedPreferenceString(context: Context, key: String?, defaultValue: String?): String {
-        return context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE).getString(key, defaultValue)!!
+    fun getString(context: Context, key: String?, defaultValue: String?): String {
+        return context.getSharedPreferences(Constant.KEY_PREFENRENCE_NAME, Context.MODE_PRIVATE).getString(key, defaultValue)!!
     }
 
-    fun getSharedPreferenceBoolean(context: Context, key: String?, defaultValue: Boolean?): Boolean {
-        return context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE).getBoolean(key, defaultValue!!)
+    fun getBoolean(context: Context, key: String?): Boolean {
+        return context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE).getBoolean(key,false)
     }
 
     fun clearSharedPreference(context: Context) {

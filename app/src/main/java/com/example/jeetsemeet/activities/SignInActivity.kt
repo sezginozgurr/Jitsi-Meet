@@ -3,6 +3,7 @@ package com.example.jeetsemeet.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.jeetsemeet.databinding.ActivitySignInBinding
@@ -30,12 +31,12 @@ class SignInActivity : AppCompatActivity() {
         }
         binding.btnSignIn.setOnClickListener {
             if (isValid()) {
-                signIn()
+                //signIn()
             }
         }
     }
 
-    private fun signIn() {
+    /*private fun signIn() {
         binding.btnSignIn.visibility = View.GONE
         binding.progressBar.visibility = View.VISIBLE
 
@@ -46,16 +47,16 @@ class SignInActivity : AppCompatActivity() {
             .get()
             .addOnCompleteListener { task ->
                 if ((task.isSuccessful) && task.result != null && task.result!!.documents.size > 0) {
+                    Log.e("TAG","${task.result.toString()}")
+                   Log.e("TAG","${task.result!!.documents[0]}")
                     val documentSnapshot: DocumentSnapshot = task.result!!.documents[0]
-                    LocalDataManager.instance.getSharedPreferenceString(
+                    LocalDataManager.instance.setSharedPreferenceString(
                         this@SignInActivity,
                         Constant.KEY_EMAIL,
                         documentSnapshot.getString(Constant.KEY_EMAIL)
                     )
                     LocalDataManager.instance.getSharedPreferenceString(
-                        this@SignInActivity,
-                        Constant.KEY_USER_ID,
-                        documentSnapshot.id
+                        this@SignInActivity, Constant.KEY_USER_ID, documentSnapshot.id
                     )
                     startActivity(Intent(this, MainActivity::class.java))
                 } else {
@@ -64,7 +65,7 @@ class SignInActivity : AppCompatActivity() {
                     Toast.makeText(this, "Unable sign in", Toast.LENGTH_SHORT).show()
                 }
             }
-    }
+    }*/
 
     private fun isValid(): Boolean {
         if (binding.inputEmail.text.toString().trim().isNullOrEmpty()) {
