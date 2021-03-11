@@ -34,13 +34,6 @@ class MainActivity : AppCompatActivity() {
                 val token = instanceIdResult.token
                 sendFCMTokenToDatabase(token)
             }
-        /*FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { task ->
-            if (task.isSuccessful && task.result != null) {
-                sendFCMTokenToDatabase(task.result!!.token)
-            }
-        }.addOnFailureListener {
-
-        }*/
     }
 
     private fun sendFCMTokenToDatabase(token: String) {
