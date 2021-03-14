@@ -41,7 +41,11 @@ class MainActivity : AppCompatActivity() {
                 sendFCMTokenToDatabase(token)
             }
 
-        binding.usersRecycler.adapter = UsersAdapter(usersList)
+        binding.usersRecycler.adapter = UsersAdapter(usersList,{ user, position ->
+            Toast.makeText(this, "Tıklanan call", Toast.LENGTH_SHORT).show()
+        }){ user, position ->
+            Toast.makeText(this, "Tıklanan video", Toast.LENGTH_SHORT).show()
+        }
         getUser()
     }
 
@@ -65,8 +69,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 if (usersList.size > 0) {
                     Toast.makeText(this, "0 dan büyük", Toast.LENGTH_SHORT).show()
-                    binding.usersRecycler.adapter = UsersAdapter(usersList)
-//                    adapter.notifyDataSetChanged()
+                    binding.usersRecycler.adapter = UsersAdapter(usersList, { user, position ->
+                        Toast.makeText(this, "Tıklanan call", Toast.LENGTH_SHORT).show()
+                    }){ user, position ->
+                        Toast.makeText(this, "Tıklanan video", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     binding.txtErrorMessage.visibility = View.VISIBLE
                 }
