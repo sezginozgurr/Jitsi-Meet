@@ -1,19 +1,25 @@
 package com.example.jeetsemeet.activities
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.jeetsemeet.adapters.UsersAdapter
 import com.example.jeetsemeet.databinding.ActivityMainBinding
+import com.example.jeetsemeet.model.User
 import com.example.jeetsemeet.util.Constant
 import com.example.jeetsemeet.util.LocalDataManager
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.iid.FirebaseInstanceId
 
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
+    private val usersList: ArrayList<User> = arrayListOf()
+    private lateinit var adapter: UsersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +40,41 @@ class MainActivity : AppCompatActivity() {
                 val token = instanceIdResult.token
                 sendFCMTokenToDatabase(token)
             }
+
+        binding.usersRecycler.adapter = UsersAdapter(usersList)
+        getUser()
+    }
+
+    private fun getUser() {
+        val dataBase: FirebaseFirestore = FirebaseFirestore.getInstance()
+        dataBase.collection(Constant.KEY_COLLECTION_USERS).get().addOnCompleteListener { task ->
+            Toast.makeText(this, "collectiona girdi", Toast.LENGTH_SHORT).show()
+            val myUserId: String =
+                LocalDataManager.instance.getString(this, Constant.KEY_USER_ID, "default geldi")
+            if (task.isSuccessful && task.result != null) {
+                for (i in task.result!!) {
+                    if (myUserId == i.id) {
+                        continue
+                    }
+                    val user = User()
+                    user.firstName = i.getString(Constant.KEY_FIRST_NAME)
+                    user.lastName = i.getString(Constant.KEY_LAST_NAME)
+                    user.email = i.getString(Constant.KEY_EMAIL)
+                    user.token = i.getString(Constant.KEY_USER_ID)
+                    usersList.add(user)
+                }
+                if (usersList.size > 0) {
+                    Toast.makeText(this, "0 dan büyük", Toast.LENGTH_SHORT).show()
+                    binding.usersRecycler.adapter = UsersAdapter(usersList)
+//                    adapter.notifyDataSetChanged()
+                } else {
+                    binding.txtErrorMessage.visibility = View.VISIBLE
+                }
+            } else {
+                binding.txtErrorMessage.text = String.format("%s", "No Users avaible")
+                binding.txtErrorMessage.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun sendFCMTokenToDatabase(token: String) {
