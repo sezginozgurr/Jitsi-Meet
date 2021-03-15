@@ -12,9 +12,13 @@
     <color name="colorAccent">#F44336</color>
     <color name="colorPrimaryText">#009688</color>
     <color name="colorSecondryText">#03A9F4</color>
+    <color name="green">#7BE105</color>
+    <color name="red">#F40303</color>
     <color name="colorDivider">#8BC34A</color>
     <color name="colorTextIcons">#FF9800</color>
     <color name="yellow">#FFC107</color>
     <color name="colorBackground">#FF5722</color>
     <color name="colorHintText">#BAB6B6</color>
+    <color name="colorMeetingInvalidationStart">#4004BB</color>
+    <color name="colorMeetingInvalidationEnd">#8A1AAA</color>
 </resources>

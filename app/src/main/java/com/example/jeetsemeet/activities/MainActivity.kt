@@ -1,5 +1,6 @@
 package com.example.jeetsemeet.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -19,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private val usersList: ArrayList<User> = arrayListOf()
-    private lateinit var adapter: UsersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +41,17 @@ class MainActivity : AppCompatActivity() {
                 sendFCMTokenToDatabase(token)
             }
 
-        binding.usersRecycler.adapter = UsersAdapter(usersList,{ user, position ->
+        binding.usersRecycler.adapter = UsersAdapter(usersList, { user, position ->
             Toast.makeText(this, "Tıklanan call", Toast.LENGTH_SHORT).show()
-        }){ user, position ->
+            startActivity(Intent(this, InComingInvitationActivity::class.java))
+        }) { user, position ->
             Toast.makeText(this, "Tıklanan video", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, OutGoingInvitationActivity::class.java))
         }
         getUser()
+        binding.swipeReflesh.setOnRefreshListener {
+            getUser()
+        }
     }
 
     private fun getUser() {
@@ -71,8 +76,16 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "0 dan büyük", Toast.LENGTH_SHORT).show()
                     binding.usersRecycler.adapter = UsersAdapter(usersList, { user, position ->
                         Toast.makeText(this, "Tıklanan call", Toast.LENGTH_SHORT).show()
-                    }){ user, position ->
+                        val intent = Intent(this, InComingInvitationActivity::class.java)
+                        intent.putExtra("user",user)
+                        intent.putExtra("type","video")
+                        startActivity(intent)
+                    }) { user, position ->
                         Toast.makeText(this, "Tıklanan video", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, OutGoingInvitationActivity::class.java)
+                        intent.putExtra("user",user)
+                        intent.putExtra("type","video")
+                        startActivity(intent)
                     }
                 } else {
                     binding.txtErrorMessage.visibility = View.VISIBLE
